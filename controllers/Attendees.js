@@ -20,6 +20,16 @@ const attendees = {
       })
       .catch(() => res.sendStatus(500));
   },
+
+  listAttendees(req, res) {
+    AttendeesModel.find()
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((error) => {
+        res.status(400).json({ error: error });
+      });
+  },
 };
 
 module.exports = attendees;
