@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const signInEmail = require("../libs/signInEmail");
 const AdminModel = require("../models/Admin");
+const { v4: uuidv4 } = require("uuid");
+const sendResetEmail = require("../libs/sendResetLink");
 const saltRounds = 10;
 
 async function login(req, res) {
@@ -47,7 +49,6 @@ async function signin(req, res) {
           name: req.body.name,
           email: lowEmail,
           password: hashedPassword,
-          position: "",
           adress: "",
         };
         await AdminModel.create(newAdmin);
@@ -62,6 +63,37 @@ async function signin(req, res) {
   }
 }
 
-const Auth = { login, signin };
+async function forgot(req, res) {
+  if (!req.body.email) {
+    res.status(400).send("Incorrect input");
+  } else {
+    const lowEmail = req.body.email.toLowerCase().trim();
+
+    const isExistingAdmin = await AdminModel.findOne({ email: lowEmail });
+    console.log(isExistingAdmin);
+    if (isExistingAdmin !== null) {
+      try {
+        const uuid = uuidv4();
+        const request = {
+          uuid,
+          email: isExistingAdmin.email,
+        };
+        sendResetEmail(isExistingAdmin.email, uuid);
+      } catch (err) {
+        res.status(400).send(err);
+      }
+    } else {
+      res.status(500).send("No user with this email");
+    }
+  }
+}
+
+async function reset(req, res) {
+  console.log("toto");
+  console.log(req.params);
+  console.log(req.body);
+}
+
+const Auth = { login, signin, forgot, reset };
 
 module.exports = Auth;
