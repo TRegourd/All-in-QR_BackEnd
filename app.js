@@ -8,7 +8,8 @@ require("dotenv").config();
 require("./dbConnect");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var adminsRouter = require("./routes/admins");
+const eventRouter = require("./routes/events");
 
 var app = express();
 
@@ -19,7 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/admins", adminsRouter);
+app.use("/events", eventRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 
