@@ -9,8 +9,8 @@ async function login(req, res) {
   if (!email || !password) return res.sendStatus(400);
 
   const lowEmail = email.toLowerCase().trim();
-  const admin = await UserModel.findOne({ email: lowEmail });
-  if (user === null) {
+  const admin = await AdminModel.findOne({ email: lowEmail });
+  if (admin === null) {
     res.status(400);
     return res.send("No User Found");
   }
