@@ -9,9 +9,9 @@ require("./dbConnect");
 
 var indexRouter = require("./routes/index");
 var adminsRouter = require("./routes/admins");
-const eventRouter = require("./routes/events");
+var eventRouter = require("./routes/events");
 var attendeesRouter = require("./routes/attendees");
-
+var authRouter = require("./routes/auth");
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.use("/", indexRouter);
 app.use("/admins", adminsRouter);
 app.use("/events", eventRouter);
 app.use("/attendees", attendeesRouter);
-
+app.use("/auth", authRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 
