@@ -10,6 +10,8 @@ require("./dbConnect");
 var indexRouter = require("./routes/index");
 var adminsRouter = require("./routes/admins");
 const eventRouter = require("./routes/events");
+var attendeesRouter = require("./routes/attendees");
+
 
 var app = express();
 
@@ -20,8 +22,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/", indexRouter);
+
 app.use("/admins", adminsRouter);
 app.use("/events", eventRouter);
+app.use("/attendees", attendeesRouter);
+
 
 app.use(express.static(path.join(__dirname, "public")));
 
