@@ -70,14 +70,12 @@ async function forgot(req, res) {
     const lowEmail = req.body.email.toLowerCase().trim();
 
     const isExistingAdmin = await AdminModel.findOne({ email: lowEmail });
-    console.log(isExistingAdmin);
+
     if (isExistingAdmin !== null) {
       try {
         const uuid = uuidv4();
-        const request = {
-          uuid,
-          email: isExistingAdmin.email,
-        };
+        console.log(uuid);
+        await AdminModel.findOneAndUpdate({ email: lowEmail }, { uuid: uuid });
         sendResetEmail(isExistingAdmin.email, uuid);
       } catch (err) {
         res.status(400).send(err);
@@ -92,6 +90,17 @@ async function reset(req, res) {
   console.log("toto");
   console.log(req.params);
   console.log(req.body);
+  const isSameUser = await AdminModel.findOne({ uuid: req.params.id });
+
+  if (isSameUser) {
+    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    await AdminModel.findOneAndUpdate(
+      { uuid: req.params.id },
+      { password: hashedPassword }
+    );
+  } else {
+    res.status(404).json();
+  }
 }
 
 const Auth = { login, signin, forgot, reset };
