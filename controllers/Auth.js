@@ -74,7 +74,6 @@ async function forgot(req, res) {
     if (isExistingAdmin !== null) {
       try {
         const uuid = uuidv4();
-        console.log(uuid);
         await AdminModel.findOneAndUpdate({ email: lowEmail }, { uuid: uuid });
         sendResetEmail(isExistingAdmin.email, uuid);
       } catch (err) {
@@ -87,9 +86,6 @@ async function forgot(req, res) {
 }
 
 async function reset(req, res) {
-  console.log("toto");
-  console.log(req.params);
-  console.log(req.body);
   const isSameUser = await AdminModel.findOne({ uuid: req.params.id });
 
   if (isSameUser) {
