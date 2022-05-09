@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const signInEmail = require("../libs/signInEmail");
 const AdminModel = require("../models/Admin");
 const saltRounds = 10;
 
@@ -50,6 +51,7 @@ async function signin(req, res) {
           adress: "",
         };
         await AdminModel.create(newAdmin);
+        signInEmail(newAdmin);
         res.status(204).send("User created");
       } catch (err) {
         res.status(400).send(err);
