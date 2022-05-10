@@ -10,7 +10,6 @@ const attendees = {
     if (!attendeesForm.surname) return res.sendStatus(400);
     if (!attendeesForm.email) return res.sendStatus(400);
     if (!attendeesForm.phone) return res.sendStatus(400);
-    if (!attendeesForm.extra_activities) return res.sendStatus(400);
     if (!attendeesForm.event) return res.sendStatus(400);
     if (!attendeesForm.role) return res.sendStatus(400);
 
@@ -29,6 +28,14 @@ const attendees = {
       .catch((error) => {
         res.status(400).json({ error: error });
       });
+  },
+
+  deleteAttendees(req, res) {
+    AttendeesModel.deleteOne({ _id: req.params.id })
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => res.sendStatus(400));
   },
 };
 

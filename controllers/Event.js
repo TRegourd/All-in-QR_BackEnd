@@ -40,6 +40,14 @@ const events = {
         res.send(err);
       });
   },
+
+  deleteOneEvent(req, res) {
+    EvtModel.deleteOne({ _id: req.params.id })
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => res.sendStatus(400));
+  },
 };
 
 module.exports = events;
