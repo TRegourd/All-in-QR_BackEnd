@@ -6,4 +6,6 @@ router.post("/", Attendees.createAttendees);
 
 router.get("/", Attendees.listAttendees);
 
+router.delete("/:id", Attendees.deleteAttendees);
+
 module.exports = router;

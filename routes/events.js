@@ -8,4 +8,6 @@ eventRouter.get("/", Event.getEvents);
 
 eventRouter.get("/:id", Event.getOneEvent);
 
+eventRouter.delete("/:id", Event.deleteOneEvent);
+
 module.exports = eventRouter;

@@ -24,6 +24,10 @@ const admins = {
       })
       .catch(() => res.sendStatus(500));
   },
+
+  getCurrentAdmin(req, res) {
+    res.send(req.user);
+  },
 };
 
 module.exports = admins;
