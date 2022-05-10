@@ -4,9 +4,11 @@ var router = express.Router();
 
 router.post("/", Attendees.createAttendees);
 
+
+router.get("/:id", Attendees.listAttendees);
+
 router.put("/:id", Attendees.modifyAttendees);
 
-router.get("/", Attendees.listAttendees);
 
 router.get("/:id", Attendees.listOneAttendees);
 

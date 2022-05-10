@@ -6,8 +6,8 @@ const ActivitiesSchema = new mongoose.Schema({
   duration: Number,
   price: Number,
   desc: String,
-  event: { type: mongoose.Schema.Types.ObjectId, ref: "events" },
-  role: { type: mongoose.Schema.Types.ObjectId, ref: "roles" },
+  event: { type: mongoose.Schema.Types.ObjectId, ref: "Events" },
+  role: { type: mongoose.Schema.Types.ObjectId, ref: "Roles" },
 });
 
 const ActivitiesModel = mongoose.model("Activities", ActivitiesSchema);
