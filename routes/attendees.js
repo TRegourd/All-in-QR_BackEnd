@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.post("/", Attendees.createAttendees);
 
-router.get("/", Attendees.listAttendees);
+router.get("/:id", Attendees.listAttendees);
 
 router.delete("/:id", Attendees.deleteAttendees);
 

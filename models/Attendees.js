@@ -6,10 +6,10 @@ const AttendeesSchema = new mongoose.Schema({
   email: String,
   phone: String,
   extra_activities: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "activities" },
+    { type: mongoose.Schema.Types.ObjectId, ref: "Activities" },
   ],
-  event: { type: mongoose.Schema.Types.ObjectId, ref: "events" },
-  role: { type: mongoose.Schema.Types.ObjectId, ref: "roles" },
+  event: { type: mongoose.Schema.Types.ObjectId, ref: "Events" },
+  role: { type: mongoose.Schema.Types.ObjectId, ref: "Roles" },
 });
 
 const AttendeesModel = mongoose.model("Attendees", AttendeesSchema);

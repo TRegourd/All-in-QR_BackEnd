@@ -1,4 +1,6 @@
 const AttendeesModel = require("../models/Attendees");
+const Event = require("../models/Events");
+const Role = require("../controllers/Roles");
 
 const attendees = {
   createAttendees(req, res) {
@@ -20,8 +22,9 @@ const attendees = {
       .catch(() => res.sendStatus(500));
   },
 
-  listAttendees(req, res) {
-    AttendeesModel.find()
+  listAttendees(req, res, next) {
+    AttendeesModel.find({ event: req.params.id })
+      .populate(["role", "event"])
       .then((data) => {
         res.status(200).json(data);
       })
