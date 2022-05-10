@@ -28,6 +28,15 @@ const admins = {
   getCurrentAdmin(req, res) {
     res.send(req.user);
   },
+
+  editCurrentUser(req, res) {
+    const adminForm = req.body;
+    if (!adminForm.name) return res.sendStatus(400);
+    if (!adminForm.email) return res.sendStatus(400);
+    AdminModel.findByIdAndUpdate(req.user._id, req.body)
+      .then((result) => res.sendStatus(201))
+      .catch(() => res.sendStatus(500));
+  },
 };
 
 module.exports = admins;

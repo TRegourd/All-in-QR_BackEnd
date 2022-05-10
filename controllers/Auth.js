@@ -9,6 +9,8 @@ const saltRounds = 10;
 async function login(req, res) {
   const { email, password } = req.body;
 
+  console.log(req.body);
+
   if (!email || !password) return res.sendStatus(400);
 
   const lowEmail = email.toLowerCase().trim();
@@ -52,7 +54,7 @@ async function signin(req, res) {
           adress: "",
         };
         await AdminModel.create(newAdmin);
-        signInEmail(newAdmin);
+        //signInEmail(newAdmin);
         res.status(204).send("User created");
       } catch (err) {
         res.status(400).send(err);
