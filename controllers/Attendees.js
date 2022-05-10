@@ -24,7 +24,7 @@ const attendees = {
 
   listAttendees(req, res, next) {
     AttendeesModel.find({ event: req.params.id })
-      .populate(["role", "event"])
+      .populate(["role", "event", "extra_activities"])
       .then((data) => {
         res.status(200).json(data);
       })
@@ -35,6 +35,7 @@ const attendees = {
 
   listOneAttendees(req, res, next) {
     AttendeesModel.findById(req.params.id)
+      .populate(["role", "event", "extra_activities"])
       .then((data) => {
         res.status(200).json(data);
       })
