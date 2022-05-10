@@ -22,6 +22,24 @@ const events = {
       })
       .catch((e) => res.send(e));
   },
+
+  getEvents(req, res, next) {
+    EvtModel.find()
+      .then((eventList) => {
+        res.send(eventList);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+
+  getOneEvent(req, res, next) {
+    EvtModel.findById(req.params.id)
+      .then((event) => res.send(event))
+      .catch((err) => {
+        res.send(err);
+      });
+  },
 };
 
 module.exports = events;

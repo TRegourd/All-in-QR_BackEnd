@@ -4,4 +4,8 @@ const Event = require("../controllers/Event");
 
 eventRouter.post("/", Event.createEvent);
 
+eventRouter.get("/", Event.getEvents);
+
+eventRouter.get("/:id", Event.getOneEvent);
+
 module.exports = eventRouter;

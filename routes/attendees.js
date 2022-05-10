@@ -4,4 +4,6 @@ var router = express.Router();
 
 router.post("/", Attendees.createAttendees);
 
+router.get("/", Attendees.listAttendees);
+
 module.exports = router;
