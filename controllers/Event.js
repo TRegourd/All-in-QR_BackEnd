@@ -2,16 +2,21 @@ const EvtModel = require("../models/Events");
 
 const events = {
   createEvent(req, res) {
-    console.log(req.body);
+    const { name, start_date, end_date, place, desc } = req.body;
 
-    const newEvent = req.body;
-    if (!newEvent.name) return res.sendStatus(400);
-    if (!newEvent.start_date) return res.sendStatus(400);
-    if (!newEvent.end_date) return res.sendStatus(400);
-    if (!newEvent.place) return res.sendStatus(400);
-    if (!newEvent.desc) return res.sendStatus(400);
+    if (!name) return res.sendStatus(400);
+    if (!start_date) return res.sendStatus(400);
+    if (!end_date) return res.sendStatus(400);
+    if (!place) return res.sendStatus(400);
+    if (!desc) return res.sendStatus(400);
 
-    EvtModel.create(newEvent)
+    EvtModel.create({
+      name,
+      start_date,
+      end_date,
+      place,
+      desc,
+    })
       .then(() => {
         res.sendStatus(201);
       })
