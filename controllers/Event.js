@@ -2,7 +2,7 @@ const EvtModel = require("../models/Events");
 
 const events = {
   createEvent(req, res) {
-    const { name, start_date, end_date, place, desc } = req.body;
+    const { name, start_date, end_date, place, desc, admin } = req.body;
 
     if (!name) return res.sendStatus(400);
     if (!start_date) return res.sendStatus(400);
@@ -16,6 +16,7 @@ const events = {
       end_date,
       place,
       desc,
+      admin,
     })
       .then(() => {
         res.sendStatus(201);
@@ -48,6 +49,31 @@ const events = {
         res.sendStatus(200);
       })
       .catch(() => res.sendStatus(400));
+  },
+
+  modifyEventById(req, res) {
+    const idEvent = req.params.id;
+    const { name, start_date, end_date, place, desc } = req.body;
+
+    if (!name) return res.sendStatus(400);
+    if (!start_date) return res.sendStatus(400);
+    if (!end_date) return res.sendStatus(400);
+    if (!place) return res.sendStatus(400);
+    if (!desc) return res.sendStatus(400);
+
+    EvtModel.findByIdAndUpdate(idEvent, {
+      name,
+      start_date,
+      end_date,
+      place,
+      desc,
+    })
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
   },
 };
 
