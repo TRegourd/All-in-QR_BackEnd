@@ -24,7 +24,8 @@ const events = {
   },
 
   getEvents(req, res, next) {
-    EvtModel.find()
+    console.log(req.user);
+    EvtModel.find({ admin: req.user._id })
       .then((eventList) => {
         res.send(eventList);
       })
