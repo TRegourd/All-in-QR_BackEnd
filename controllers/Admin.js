@@ -31,6 +31,7 @@ const admins = {
 
   editCurrentUser(req, res) {
     const adminForm = req.body;
+    console.log(adminForm);
     if (!adminForm.name) return res.sendStatus(400);
     if (!adminForm.email) return res.sendStatus(400);
     AdminModel.findByIdAndUpdate(req.user._id, req.body)
