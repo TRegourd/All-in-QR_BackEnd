@@ -7,6 +7,7 @@ const EventSchema = new mongoose.Schema({
   place: String,
   desc: String,
   admin: { type: mongoose.Types.ObjectId, ref: "Admin" },
+  type: String,
 });
 
 const EvtModel = mongoose.model("Events", EventSchema);

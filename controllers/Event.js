@@ -4,14 +4,14 @@ const ActivitiesModel = require("../models/Activities");
 
 const events = {
   createEvent(req, res) {
-    const { name, start_date, end_date, place, desc, admin } = req.body;
+    const { name, start_date, end_date, place, desc, admin, type } = req.body;
 
     if (!name) return res.sendStatus(400);
     if (!start_date) return res.sendStatus(400);
     if (!end_date) return res.sendStatus(400);
     if (!place) return res.sendStatus(400);
     if (!desc) return res.sendStatus(400);
-
+    if (!type) return res.sendStatus(400);
     EvtModel.create({
       name,
       start_date,
@@ -19,6 +19,7 @@ const events = {
       place,
       desc,
       admin,
+      type,
     })
       .then(() => {
         res.sendStatus(201);
