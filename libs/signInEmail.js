@@ -1,4 +1,6 @@
 const nodemailer = require("nodemailer");
+const MAIL_USER = process.env.MAIL_USER;
+const MAIL_PASS = process.env.MAIL_PASS;
 
 // async..await is not allowed in global scope, must use a wrapper
 async function signInEmail(user) {
@@ -9,11 +11,11 @@ async function signInEmail(user) {
   if (user) {
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-      host: "localhost",
-      port: 1025,
+      host: "smtp.ethereal.email",
+      port: 587,
       auth: {
-        user: "project.1",
-        pass: "secret.1",
+        user: MAIL_USER,
+        pass: MAIL_PASS,
       },
     });
 
