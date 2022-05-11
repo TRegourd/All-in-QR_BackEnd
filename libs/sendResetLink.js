@@ -3,7 +3,7 @@ const MAIL_USER = process.env.MAIL_USER;
 const MAIL_PASS = process.env.MAIL_PASS;
 
 // async..await is not allowed in global scope, must use a wrapper
-async function sendResetEmail(email, id) {
+async function sendResetEmail(email, uuid) {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   let testAccount = await nodemailer.createTestAccount();
@@ -24,8 +24,8 @@ async function sendResetEmail(email, id) {
       from: '"Fred Foo 👻" <foo@example.com>', // sender address
       to: email,
       subject: "Rest Link", // Subject line
-      text: `To reset your password, please click on this link: http://localhost:3000/reset/${id}`, // plain text body
-      html: `To reset your password, please click on this link: http://localhost:3000/reset/${id}`, // html body
+      text: `To reset your password, please click on this link: http://localhost:3000/reset/${uuid.token}`, // plain text body
+      html: `To reset your password, please click on this link: http://localhost:3000/reset/${uuid.token}`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);

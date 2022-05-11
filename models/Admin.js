@@ -5,7 +5,7 @@ const AdminSchema = new mongoose.Schema({
   email: String,
   password: String,
   adress: String,
-  uuid: String,
+  uuid: { token: String, timeStamp: Date },
 });
 
 const AdminModel = mongoose.model("Admin", AdminSchema);
