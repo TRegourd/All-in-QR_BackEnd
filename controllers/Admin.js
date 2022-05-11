@@ -4,8 +4,6 @@ const admins = {
   createAdmin(req, res) {
     const adminForm = req.body;
 
-    console.log(adminForm);
-
     if (!adminForm.name) return res.sendStatus(400);
     if (!adminForm.email) return res.sendStatus(400);
     if (!adminForm.password) return res.sendStatus(400);
