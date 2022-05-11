@@ -81,7 +81,7 @@ async function forgot(req, res) {
         };
         await AdminModel.findOneAndUpdate({ email: lowEmail }, { uuid: uuid });
         sendResetEmail(isExistingAdmin.email, uuid);
-        res.send(200);
+        res.sendStatus(200);
       } catch (err) {
         res.status(400).send(err);
       }
@@ -103,7 +103,7 @@ async function reset(req, res) {
         { "uuid.token": req.params.id },
         { password: hashedPassword, uuid: {} }
       );
-      res.send(200);
+      res.sendStatus(200);
     } else {
       res.status(403).json();
     }
