@@ -14,6 +14,7 @@ var attendeesRouter = require("./routes/attendees");
 var authRouter = require("./routes/auth");
 var rolesRouter = require("./routes/roles");
 var activitiesRouter = require("./routes/activities");
+var registerRouter = require("./routes/register");
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use("/attendees", attendeesRouter);
 app.use("/auth", authRouter);
 app.use("/roles", rolesRouter);
 app.use("/activities", activitiesRouter);
+app.use("/register", registerRouter);
 app.use(express.static(path.join(__dirname, "public")));
 
 module.exports = app;
