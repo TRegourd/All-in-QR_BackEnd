@@ -1,4 +1,6 @@
 const EvtModel = require("../models/Events");
+const AttendeesModel = require("../models/Attendees");
+const ActivitiesModel = require("../models/Activities");
 
 const events = {
   createEvent(req, res) {
@@ -44,10 +46,17 @@ const events = {
   },
 
   deleteOneEvent(req, res) {
+    const id = req.params.id;
     EvtModel.deleteOne({ _id: req.params.id })
       .then(() => {
-        res.sendStatus(200);
+        AttendeesModel.deleteMany({ event: req.params.id }).then(() =>
+          console.log("Linked attendees deleted")
+        );
+        ActivitiesModel.deleteMany({ event: req.params.id }).then(() =>
+          console.log("Linked activities deleted")
+        );
       })
+      .then(res.sendStatus(200))
       .catch(() => res.sendStatus(400));
   },
 
@@ -60,6 +69,8 @@ const events = {
     if (!end_date) return res.sendStatus(400);
     if (!place) return res.sendStatus(400);
     if (!desc) return res.sendStatus(400);
+
+    console.log(req.body);
 
     EvtModel.findByIdAndUpdate(idEvent, {
       name,
