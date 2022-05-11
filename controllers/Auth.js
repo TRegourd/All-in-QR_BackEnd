@@ -4,7 +4,9 @@ const signInEmail = require("../libs/signInEmail");
 const AdminModel = require("../models/Admin");
 const { v4: uuidv4 } = require("uuid");
 const sendResetEmail = require("../libs/sendResetLink");
+const { now } = require("mongoose");
 const saltRounds = 10;
+const dayjs = require("dayjs");
 
 async function login(req, res) {
   const { email, password } = req.body;
@@ -75,9 +77,13 @@ async function forgot(req, res) {
 
     if (isExistingAdmin !== null) {
       try {
-        const uuid = uuidv4();
+        const uuid = {
+          token: uuidv4(),
+          timeStamp: Date.now(),
+        };
         await AdminModel.findOneAndUpdate({ email: lowEmail }, { uuid: uuid });
         sendResetEmail(isExistingAdmin.email, uuid);
+        res.send(200);
       } catch (err) {
         res.status(400).send(err);
       }
@@ -88,14 +94,21 @@ async function forgot(req, res) {
 }
 
 async function reset(req, res) {
-  const isSameUser = await AdminModel.findOne({ uuid: req.params.id });
-
-  if (isSameUser) {
-    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
-    await AdminModel.findOneAndUpdate(
-      { uuid: req.params.id },
-      { password: hashedPassword }
-    );
+  const user = await AdminModel.findOne({ "uuid.token": req.params.id });
+  if (user) {
+    const timeStampDate = dayjs(user.uuid.timeStamp);
+    const nowDate = dayjs();
+    const diffDates = nowDate.diff(timeStampDate, "minute");
+    if (req.body.email === user.email && diffDates < 15) {
+      const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+      await AdminModel.findOneAndUpdate(
+        { "uuid.token": req.params.id },
+        { password: hashedPassword, uuid: {} }
+      );
+      res.send(200);
+    } else {
+      res.status(403).json();
+    }
   } else {
     res.status(404).json();
   }
