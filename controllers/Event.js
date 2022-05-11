@@ -70,6 +70,8 @@ const events = {
     if (!place) return res.sendStatus(400);
     if (!desc) return res.sendStatus(400);
 
+    console.log(req.body);
+
     EvtModel.findByIdAndUpdate(idEvent, {
       name,
       start_date,
