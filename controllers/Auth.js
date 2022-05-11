@@ -11,8 +11,6 @@ const dayjs = require("dayjs");
 async function login(req, res) {
   const { email, password } = req.body;
 
-  console.log(req.body);
-
   if (!email || !password) return res.sendStatus(400);
 
   const lowEmail = email.toLowerCase().trim();
