@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.post("/", Roles.createRoles);
 
-router.get("/", Roles.listRoles);
+router.get("/:id", Roles.listRoles);
 
 router.put("/:id", Roles.modifyRoles);
 
