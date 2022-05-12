@@ -22,7 +22,7 @@ const activities = {
   },
 
   listActivities(req, res) {
-    ActivitiesModel.find()
+    ActivitiesModel.find({ event: req.params.id })
       .then((data) => {
         res.status(200).json(data);
       })
