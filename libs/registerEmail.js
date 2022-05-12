@@ -27,7 +27,15 @@ async function registerEmail(email, eventId, roleId) {
       to: email,
       subject: "Register to the event !",
       text: `Please click on this link: http://localhost:3000/register/${eventId}/${roleId} to register.`,
-      html: `<p>Please click on <a href="http://localhost:3000/register/${eventId}/${roleId}">this link</a>to register</p>
+      html: `    <h1>Register to the Event</h1>
+      <p>You have been invited to register to a new amazing event</p>
+      <p>
+        Please follow
+        <a href="http://localhost:3000/register/${eventId}/${roleId}"
+          >this link</a
+        >
+        to register
+      </p>
       `,
     });
 
