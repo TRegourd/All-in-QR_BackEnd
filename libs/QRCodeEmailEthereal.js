@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const MAIL_USER = process.env.MAIL_USER;
 const MAIL_PASS = process.env.MAIL_PASS;
 
-async function QRCodeEmail(email, QRCodeLink) {
+async function QRCodeEthe(email, QRCodeLink) {
   if (email) {
     const transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
@@ -13,7 +13,7 @@ async function QRCodeEmail(email, QRCodeLink) {
       },
     });
 
-    /*  const transporter = nodemailer.createTransport({
+    /* const transporter = nodemailer.createTransport({
       host: "localhost",
       port: 1025,
       auth: {
@@ -42,6 +42,6 @@ async function QRCodeEmail(email, QRCodeLink) {
   }
 }
 
-QRCodeEmail().catch(console.error);
+QRCodeEthe().catch(console.error);
 
-module.exports = QRCodeEmail;
+module.exports = QRCodeEthe;

@@ -4,23 +4,23 @@ const MAIL_PASS = process.env.MAIL_PASS;
 
 async function signInEmail(user) {
   if (user) {
-    const transporter = nodemailer.createTransport({
+    /*  const transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
         user: MAIL_USER,
         pass: MAIL_PASS,
       },
-    });
+    }); */
 
-    // const transporter = nodemailer.createTransport({
-    //   host: "localhost",
-    //   port: 1025,
-    //   auth: {
-    //     user: "project.1",
-    //     pass: "secret.1",
-    //   },
-    // });
+    const transporter = nodemailer.createTransport({
+      host: "localhost",
+      port: 1025,
+      auth: {
+        user: "project.1",
+        pass: "secret.1",
+      },
+    });
 
     let info = await transporter.sendMail({
       from: '"Fred Foo 👻" <foo@example.com>',
