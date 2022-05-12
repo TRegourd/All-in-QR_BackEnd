@@ -7,21 +7,24 @@ const roles = {
     console.log(rolesForm);
 
     if (!rolesForm.name) return res.sendStatus(400);
+    if (!rolesForm.event) return res.sendStatus(400);
 
-    RolesModel.find({ name: rolesForm.name }).then((result) => {
-      if (result.length !== 0) return res.sendStatus(409);
-      else {
-        RolesModel.create(rolesForm)
-          .then(() => {
-            res.sendStatus(201);
-          })
-          .catch(() => res.sendStatus(500));
+    RolesModel.find({ event: rolesForm.event, name: rolesForm.name }).then(
+      (result) => {
+        if (result.length !== 0) return res.sendStatus(409);
+        else {
+          RolesModel.create(rolesForm)
+            .then(() => {
+              res.sendStatus(201);
+            })
+            .catch(() => res.sendStatus(500));
+        }
       }
-    });
+    );
   },
 
   listRoles(req, res) {
-    RolesModel.find()
+    RolesModel.find({ event: req.params.id })
       .then((data) => {
         res.status(200).json(data);
       })
