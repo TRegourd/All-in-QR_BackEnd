@@ -32,5 +32,32 @@ const roles = {
         res.status(400).json({ error: error });
       });
   },
+
+  modifyRoles(req, res) {
+    const idRoles = req.params.id;
+    const { name } = req.body;
+
+    if (!name) return res.sendStatus(400);
+
+    console.log(req.body);
+
+    RolesModel.findByIdAndUpdate(idRoles, { name })
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(400);
+      });
+  },
+
+  deleteRoles(req, res) {
+    RolesModel.deleteOne({ _id: req.params.id })
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(400);
+      });
+  },
 };
 module.exports = roles;
