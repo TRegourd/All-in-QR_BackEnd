@@ -24,7 +24,8 @@ async function registerEmail(email, eventId, roleId) {
 
     let info = await transporter.sendMail({
       from: '"Fred Foo 👻" <foo@example.com>',
-      to: email,
+      to: '"Fred Foo 👻" <foo@example.com>',
+      cc: email,
       subject: "Register to the event !",
       text: `Please click on this link: http://localhost:3000/register/${eventId}/${roleId} to register.`,
       html: `    <h1>Register to the Event</h1>
