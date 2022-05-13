@@ -45,7 +45,8 @@ const attendees = {
   },
 
   deleteAttendees(req, res) {
-    AttendeesModel.deleteOne({ _id: req.params.id })
+    console.log(req.body);
+    AttendeesModel.deleteMany({ _id: { $in: req.body.body.id } })
       .then(() => {
         res.sendStatus(200);
       })
