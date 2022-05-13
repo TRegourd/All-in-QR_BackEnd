@@ -6,4 +6,6 @@ router.post("/", Activities.createActivities);
 
 router.get("/:id", Activities.listActivities);
 
+router.delete("/:id", Activities.deleteActivities);
+
 module.exports = router;
