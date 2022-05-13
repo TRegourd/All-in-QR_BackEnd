@@ -8,4 +8,6 @@ router.get("/:id", Activities.listActivities);
 
 router.delete("/:id", Activities.deleteActivities);
 
+router.put("/:id", Activities.modifyActivities);
+
 module.exports = router;

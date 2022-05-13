@@ -32,6 +32,7 @@ const activities = {
         res.status(400).json({ error: error });
       });
   },
+
   deleteActivities(req, res) {
     ActivitiesModel.deleteOne({ _id: req.params.id })
       .then((data) => {
@@ -40,6 +41,26 @@ const activities = {
       .catch((error) => {
         res.status(400).json({ error: error });
       });
+  },
+
+  modifyActivities(req, res) {
+    const activitiesForm = req.body;
+
+    console.log(activitiesForm);
+
+    if (!activitiesForm.name) return res.sendStatus(400);
+    if (!activitiesForm.date) return res.sendStatus(400);
+    if (!activitiesForm.duration) return res.sendStatus(400);
+    if (!activitiesForm.price) return res.sendStatus(400);
+    if (!activitiesForm.desc) return res.sendStatus(400);
+    if (!activitiesForm.event) return res.sendStatus(400);
+    if (!activitiesForm.role) return res.sendStatus(400);
+
+    ActivitiesModel.findOneAndUpdate({ _id: req.params.id }, activitiesForm)
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(() => res.sendStatus(500));
   },
 };
 
