@@ -4,6 +4,6 @@ var router = express.Router();
 
 router.post("/", Activities.createActivities);
 
-router.get("/", Activities.listActivities);
+router.get("/:id", Activities.listActivities);
 
 module.exports = router;

@@ -2,8 +2,8 @@ const nodemailer = require("nodemailer");
 const MAIL_USER = process.env.MAIL_USER;
 const MAIL_PASS = process.env.MAIL_PASS;
 
-async function signInEmail(user) {
-  if (user) {
+async function registerEmail(email, eventId, roleId) {
+  if (email) {
     const transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
@@ -24,16 +24,19 @@ async function signInEmail(user) {
 
     let info = await transporter.sendMail({
       from: '"Fred Foo 👻" <foo@example.com>',
-      to: user.email,
-      subject: "Hello ✔",
-      text: `Thanks for signing in to All-in-QR`,
-      html: `    <p>Thanks for signing in to All-in-QR</p>
+      to: email,
+      subject: "Register to the event !",
+      text: `Please click on this link: http://localhost:3000/register/${eventId}/${roleId} to register.`,
+      html: `    <h1>Register to the Event</h1>
+      <p>You have been invited to register to a new amazing event</p>
       <p>
-        Get Started organizing your events
-        <button>
-          <a href="http://localhost:3000/login">Let's go</a>
-        </button>
-      </p>`,
+        Please follow
+        <a href="http://localhost:3000/register/${eventId}/${roleId}"
+          >this link</a
+        >
+        to register
+      </p>
+      `,
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -41,6 +44,6 @@ async function signInEmail(user) {
   }
 }
 
-signInEmail().catch(console.error);
+registerEmail().catch(console.error);
 
-module.exports = signInEmail;
+module.exports = registerEmail;

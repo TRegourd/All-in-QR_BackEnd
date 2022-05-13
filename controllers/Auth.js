@@ -4,7 +4,6 @@ const signInEmail = require("../libs/signInEmail");
 const AdminModel = require("../models/Admin");
 const { v4: uuidv4 } = require("uuid");
 const sendResetEmail = require("../libs/sendResetLink");
-const { now } = require("mongoose");
 const saltRounds = 10;
 const dayjs = require("dayjs");
 
