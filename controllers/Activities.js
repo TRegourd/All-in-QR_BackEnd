@@ -23,6 +23,17 @@ const activities = {
 
   listActivities(req, res) {
     ActivitiesModel.find({ event: req.params.id })
+      .populate(["role", "event"])
+
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((error) => {
+        res.status(400).json({ error: error });
+      });
+  },
+  deleteActivities(req, res) {
+    ActivitiesModel.deleteOne({ _id: req.params.id })
       .then((data) => {
         res.status(200).json(data);
       })
