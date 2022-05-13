@@ -10,6 +10,6 @@ router.put("/:id", Attendees.modifyAttendees);
 
 router.get("/:id", Attendees.listOneAttendees);
 
-router.delete("/:id", Attendees.deleteAttendees);
+router.post("/delete", Attendees.deleteAttendees);
 
 module.exports = router;
