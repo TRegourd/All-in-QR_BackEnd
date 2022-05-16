@@ -27,6 +27,21 @@ function generateQRCodeAll(req, res, next) {
     });
 }
 
-const QRCode = { generateQRCode, generateQRCodeAll };
+function generateQRCodeToMany(req, res) {
+  AttendeesModel.find({ _id: { $in: req.body } })
+    .then((data) => {
+      data.map((attendee) => {
+        QRCodeNPM.toDataURL(JSON.stringify(attendee._id), function (err, url) {
+          QRCodeEthe(attendee.email, url);
+        });
+      });
+      res.send("Emails envoyés");
+    })
+    .catch((error) => {
+      res.status(400).json({ error: error });
+    });
+}
+
+const QRCode = { generateQRCode, generateQRCodeAll, generateQRCodeToMany };
 
 module.exports = QRCode;
