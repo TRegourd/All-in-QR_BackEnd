@@ -55,15 +55,6 @@ const attendees = {
   modifyAttendees(req, res) {
     const attendeesForm = req.body;
 
-    console.log(attendeesForm);
-
-    if (!attendeesForm.name) return res.sendStatus(400);
-    if (!attendeesForm.surname) return res.sendStatus(400);
-    if (!attendeesForm.email) return res.sendStatus(400);
-    if (!attendeesForm.phone) return res.sendStatus(400);
-    if (!attendeesForm.event) return res.sendStatus(400);
-    if (!attendeesForm.role) return res.sendStatus(400);
-
     AttendeesModel.findOneAndUpdate({ _id: req.params.id }, attendeesForm)
       .then(() => {
         res.sendStatus(201);
