@@ -6,7 +6,7 @@ router.post("/", Activities.createActivities);
 
 router.get("/:id", Activities.listActivities);
 
-router.delete("/:id", Activities.deleteActivities);
+router.post("/delete", Activities.deleteActivities);
 
 router.put("/:id", Activities.modifyActivities);
 

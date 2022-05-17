@@ -51,7 +51,7 @@ const roles = {
   },
 
   deleteRoles(req, res) {
-    RolesModel.deleteOne({ _id: req.params.id })
+    RolesModel.deleteMany({ _id: { $in: req.body } })
       .then(() => {
         res.sendStatus(200);
       })
