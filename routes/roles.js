@@ -8,6 +8,6 @@ router.get("/:id", Roles.listRoles);
 
 router.put("/:id", Roles.modifyRoles);
 
-router.delete("/:id", Roles.deleteRoles);
+router.post("/delete", Roles.deleteRoles);
 
 module.exports = router;
