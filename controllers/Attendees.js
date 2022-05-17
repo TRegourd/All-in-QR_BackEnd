@@ -15,7 +15,7 @@ const attendees = {
     if (!attendeesForm.event) return res.sendStatus(400);
     if (!attendeesForm.role) return res.sendStatus(400);
 
-    AttendeesModel.create(attendeesForm)
+    AttendeesModel.create({ ...attendeesForm, present: false })
       .then(() => {
         res.sendStatus(201);
       })
