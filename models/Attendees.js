@@ -10,6 +10,7 @@ const AttendeesSchema = new mongoose.Schema({
   ],
   event: { type: mongoose.Schema.Types.ObjectId, ref: "Events" },
   role: { type: mongoose.Schema.Types.ObjectId, ref: "Roles" },
+  present: Boolean,
 });
 
 const AttendeesModel = mongoose.model("Attendees", AttendeesSchema);
