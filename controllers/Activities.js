@@ -34,7 +34,7 @@ const activities = {
   },
 
   deleteActivities(req, res) {
-    ActivitiesModel.deleteOne({ _id: req.params.id })
+    ActivitiesModel.deleteMany({ _id: { $in: req.body } })
       .then((data) => {
         res.status(200).json(data);
       })
@@ -47,14 +47,6 @@ const activities = {
     const activitiesForm = req.body;
 
     console.log(activitiesForm);
-
-    if (!activitiesForm.name) return res.sendStatus(400);
-    if (!activitiesForm.date) return res.sendStatus(400);
-    if (!activitiesForm.duration) return res.sendStatus(400);
-    if (!activitiesForm.price) return res.sendStatus(400);
-    if (!activitiesForm.desc) return res.sendStatus(400);
-    if (!activitiesForm.event) return res.sendStatus(400);
-    if (!activitiesForm.role) return res.sendStatus(400);
 
     ActivitiesModel.findOneAndUpdate({ _id: req.params.id }, activitiesForm)
       .then(() => {
