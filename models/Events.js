@@ -9,6 +9,7 @@ const EventSchema = new mongoose.Schema({
   admin: { type: mongoose.Types.ObjectId, ref: "Admin" },
   type: String,
   max_attendees: Number,
+  background_image: String,
 });
 
 const EvtModel = mongoose.model("Events", EventSchema);
