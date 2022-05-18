@@ -1,10 +1,12 @@
 const EvtModel = require("../models/Events");
 const AttendeesModel = require("../models/Attendees");
 const ActivitiesModel = require("../models/Activities");
+const ShortUniqueId = require("short-unique-id");
 
 const events = {
   createEvent(req, res) {
     const { name, start_date, end_date, place, desc, admin, type } = req.body;
+    const uid = new ShortUniqueId({ length: 4, dictionary: "number" });
 
     if (!name) return res.sendStatus(400);
     if (!start_date) return res.sendStatus(400);
@@ -21,6 +23,7 @@ const events = {
       admin,
       type,
       max_attendees: 100,
+      uid: uid(),
     })
       .then(() => {
         res.sendStatus(201);
