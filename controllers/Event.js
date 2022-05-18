@@ -50,6 +50,15 @@ const events = {
       });
   },
 
+  getOneEventNative(req, res, next) {
+    EvtModel.findOne({ uid: req.params.id })
+      .populate("admin")
+      .then((event) => res.send(event))
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+
   deleteOneEvent(req, res) {
     const id = req.params.id;
     EvtModel.deleteOne({ _id: req.params.id })
