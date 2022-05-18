@@ -35,6 +35,7 @@ async function attendeeRegisterEmail(attendeesForm) {
         eventPlace = result.place;
       })
       .catch((err) => console.log(err));
+
     // const transporter = nodemailer.createTransport({
     //   host: "localhost",
     //   port: 1025,

@@ -4,6 +4,8 @@ var router = express.Router();
 
 router.post("/", Attendees.createAttendees);
 
+router.post("/email", Attendees.listOneAttendeesByEmail);
+
 router.get("/event/:id", Attendees.listAttendees);
 
 router.put("/:id", Attendees.modifyAttendees);

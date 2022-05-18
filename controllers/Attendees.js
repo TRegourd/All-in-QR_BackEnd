@@ -37,7 +37,18 @@ const attendees = {
   },
 
   listOneAttendees(req, res, next) {
-    AttendeesModel.findById(req.params.id)
+    AttendeesModel.findOne({ event: req.body.event, email: req.body.email })
+      .populate(["role", "event", "extra_activities"])
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((error) => {
+        res.status(400).json({ error: error });
+      });
+  },
+
+  listOneAttendeesByEmail(req, res, next) {
+    AttendeesModel.findById(req.body.email)
       .populate(["role", "event", "extra_activities"])
       .then((data) => {
         res.status(200).json(data);
