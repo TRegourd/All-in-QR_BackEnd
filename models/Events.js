@@ -10,6 +10,7 @@ const EventSchema = new mongoose.Schema({
   type: String,
   max_attendees: Number,
   background_image: String,
+  uid: Number,
 });
 
 const EvtModel = mongoose.model("Events", EventSchema);
