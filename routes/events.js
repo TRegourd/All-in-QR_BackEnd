@@ -9,6 +9,8 @@ eventRouter.get("/", checkAuth, Event.getEvents);
 
 eventRouter.get("/:id", Event.getOneEvent);
 
+eventRouter.get("/native/:id", Event.getOneEventNative);
+
 eventRouter.put("/:id", Event.modifyEventById);
 
 eventRouter.delete("/:id", Event.deleteOneEvent);
