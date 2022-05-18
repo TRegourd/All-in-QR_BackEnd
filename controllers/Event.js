@@ -64,7 +64,15 @@ const events = {
 
   modifyEventById(req, res) {
     const idEvent = req.params.id;
-    const { name, start_date, end_date, place, desc, max_attendees } = req.body;
+    const {
+      name,
+      start_date,
+      end_date,
+      place,
+      desc,
+      max_attendees,
+      background_image,
+    } = req.body;
 
     if (!name) return res.sendStatus(400);
     if (!start_date) return res.sendStatus(400);
@@ -81,6 +89,7 @@ const events = {
       place,
       desc,
       max_attendees,
+      background_image,
     })
       .then(() => {
         res.sendStatus(200);
