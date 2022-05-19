@@ -32,6 +32,16 @@ const activities = {
       });
   },
 
+  listActivitiesByRole(req, res) {
+    ActivitiesModel.find({ role: req.body.id })
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((error) => {
+        res.status(400).json({ error: error });
+      });
+  },
+
   listActivitiesNative(req, res) {
     EvtModel.findOne({ uid: req.params.id })
       .then((event) => {

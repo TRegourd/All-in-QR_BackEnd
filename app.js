@@ -16,6 +16,7 @@ var rolesRouter = require("./routes/roles");
 var activitiesRouter = require("./routes/activities");
 var registerRouter = require("./routes/register");
 var QRCodeRouter = require("./routes/QRCode");
+var contactRouter = require("./routes/contact");
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use("/roles", rolesRouter);
 app.use("/activities", activitiesRouter);
 app.use("/register", registerRouter);
 app.use("/qrcode", QRCodeRouter);
+app.use("/contact", contactRouter);
 app.use(express.static(path.join(__dirname, "public")));
 
 module.exports = app;
