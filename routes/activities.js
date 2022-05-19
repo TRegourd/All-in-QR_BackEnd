@@ -6,6 +6,8 @@ router.post("/", Activities.createActivities);
 
 router.get("/:id", Activities.listActivities);
 
+router.get("/native/:id", Activities.listActivitiesNative);
+
 router.post("/delete", Activities.deleteActivities);
 
 router.put("/:id", Activities.modifyActivities);

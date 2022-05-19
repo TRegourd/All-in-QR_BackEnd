@@ -1,4 +1,5 @@
 const ActivitiesModel = require("../models/Activities");
+const EvtModel = require("../models/Events");
 
 const activities = {
   createActivities(req, res) {
@@ -30,6 +31,23 @@ const activities = {
       })
       .catch((error) => {
         res.status(400).json({ error: error });
+      });
+  },
+
+  listActivitiesNative(req, res) {
+    EvtModel.findOne({ uid: req.params.id })
+      .then((event) => {
+        ActivitiesModel.find({ event: event._id })
+          .populate(["role", "event"])
+          .then((data) => {
+            res.status(200).json(data);
+          })
+          .catch((error) => {
+            res.status(400).json({ error: error });
+          });
+      })
+      .catch((err) => {
+        res.send(err);
       });
   },
 
