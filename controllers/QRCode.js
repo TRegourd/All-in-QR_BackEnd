@@ -34,6 +34,11 @@ function generateQRCodeToMany(req, res) {
         QRCodeNPM.toDataURL(JSON.stringify(attendee._id), function (err, url) {
           QRCodeEthe(attendee.email, url);
         });
+        AttendeesModel.findByIdAndUpdate(attendee._id, {
+          QRsent: true,
+        })
+          .then(console.log("QRstatus ok"))
+          .catch((err) => console.log(err));
       });
       res.send("Emails envoyés");
     })
