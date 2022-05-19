@@ -41,6 +41,16 @@ const events = {
       });
   },
 
+  getAllEvents(req, res, next) {
+    EvtModel.find()
+      .then((eventList) => {
+        res.send(eventList);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+
   getOneEvent(req, res, next) {
     EvtModel.findById(req.params.id)
       .populate("admin")
