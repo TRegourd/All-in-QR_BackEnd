@@ -14,7 +14,7 @@ const attendees = {
     if (!attendeesForm.event) return res.sendStatus(400);
     if (!attendeesForm.role) return res.sendStatus(400);
 
-    AttendeesModel.create({ ...attendeesForm, present: false })
+    AttendeesModel.create({ ...attendeesForm, present: false, QRsent: false })
       .then(() => {
         attendeeRegisterEmail(attendeesForm)
           .then(res.status(201).send("email sent"))
