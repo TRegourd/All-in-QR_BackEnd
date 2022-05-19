@@ -2,6 +2,7 @@ const AttendeesModel = require("../models/Attendees");
 const Event = require("../models/Events");
 const Role = require("../controllers/Roles");
 const attendeeRegisterEmail = require("../libs/attendeeRegisterEmail");
+const ActivitiesModel = require("../models/Activities");
 
 const attendees = {
   createAttendees(req, res) {
@@ -70,11 +71,22 @@ const attendees = {
   modifyAttendees(req, res) {
     const attendeesForm = req.body;
 
-    AttendeesModel.findOneAndUpdate({ _id: req.params.id }, attendeesForm)
-      .then(() => {
-        res.sendStatus(201);
-      })
-      .catch(() => res.sendStatus(500));
+    const array = req.body.extra_activities.split(",");
+    console.log(array);
+    AttendeesModel.findById(req.body.id).then((attendee) => {
+      let event = attendee.event;
+      ActivitiesModel.find({ name: { $in: array }, event: event }).then(
+        (result) => {
+          const toto = { extra_activities: result };
+          console.log(toto);
+          AttendeesModel.findOneAndUpdate({ _id: req.params.id }, toto)
+            .then(() => {
+              res.sendStatus(201);
+            })
+            .catch(() => res.sendStatus(500));
+        }
+      );
+    });
   },
 };
 
