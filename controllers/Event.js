@@ -2,6 +2,8 @@ const EvtModel = require("../models/Events");
 const AttendeesModel = require("../models/Attendees");
 const ActivitiesModel = require("../models/Activities");
 const ShortUniqueId = require("short-unique-id");
+const RolesModel = require("../models/Roles");
+const dayjs = require("dayjs");
 
 const events = {
   createEvent(req, res) {
@@ -25,14 +27,43 @@ const events = {
       max_attendees: 100,
       uid: uid(),
     })
-      .then(() => {
-        res.sendStatus(201);
+      .then((resultEvent) => {
+        const rolesForm = {
+          name: "visitor",
+          event: resultEvent._id,
+        };
+        RolesModel.create(rolesForm)
+          .then((resultRole) => {
+            const activitiesForm = {
+              name: "basic entrance",
+              date: resultEvent.start_date,
+              price: "10",
+              event: resultEvent._id,
+              role: resultRole._id,
+            };
+            ActivitiesModel.create(activitiesForm)
+              .then(() => {
+                res.sendStatus(201);
+              })
+              .catch(() => res.sendStatus(500));
+          })
+          .catch(() => res.sendStatus(500));
       })
       .catch((e) => res.send(e));
   },
 
   getEvents(req, res, next) {
     EvtModel.find({ admin: req.user._id })
+      .then((eventList) => {
+        res.send(eventList);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+
+  getAllEvents(req, res, next) {
+    EvtModel.find()
       .then((eventList) => {
         res.send(eventList);
       })
@@ -91,8 +122,6 @@ const events = {
     if (!end_date) return res.sendStatus(400);
     if (!place) return res.sendStatus(400);
     if (!desc) return res.sendStatus(400);
-
-    console.log(req.body);
 
     EvtModel.findByIdAndUpdate(idEvent, {
       name,

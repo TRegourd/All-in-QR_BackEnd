@@ -7,6 +7,8 @@ eventRouter.post("/", Event.createEvent);
 
 eventRouter.get("/", checkAuth, Event.getEvents);
 
+eventRouter.get("/home/all", Event.getAllEvents);
+
 eventRouter.get("/:id", Event.getOneEvent);
 
 eventRouter.get("/native/:id", Event.getOneEventNative);

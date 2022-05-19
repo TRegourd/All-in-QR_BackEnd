@@ -39,8 +39,6 @@ const roles = {
 
     if (!name) return res.sendStatus(400);
 
-    console.log(req.body);
-
     RolesModel.findByIdAndUpdate(idRoles, { name })
       .then(() => {
         res.sendStatus(200);

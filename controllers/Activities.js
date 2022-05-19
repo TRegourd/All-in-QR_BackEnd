@@ -5,8 +5,6 @@ const activities = {
   createActivities(req, res) {
     const activitiesForm = req.body;
 
-    console.log(activitiesForm);
-
     if (!activitiesForm.name) return res.sendStatus(400);
     if (!activitiesForm.date) return res.sendStatus(400);
     if (!activitiesForm.duration) return res.sendStatus(400);
@@ -63,8 +61,6 @@ const activities = {
 
   modifyActivities(req, res) {
     const activitiesForm = req.body;
-
-    console.log(activitiesForm);
 
     ActivitiesModel.findOneAndUpdate({ _id: req.params.id }, activitiesForm)
       .then(() => {
