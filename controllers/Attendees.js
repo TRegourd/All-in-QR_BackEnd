@@ -68,8 +68,6 @@ const attendees = {
   },
 
   modifyAttendees(req, res) {
-    console.log(req.body);
-
     if (req.body.extra_activities) {
       const array = req.body.extra_activities.split(",");
       console.log(array);
@@ -77,9 +75,12 @@ const attendees = {
         let event = attendee.event;
         ActivitiesModel.find({ name: { $in: array }, event: event }).then(
           (result) => {
-            const toto = { extra_activities: result };
-            console.log(toto);
-            AttendeesModel.findOneAndUpdate({ _id: req.params.id }, toto)
+            const attendeeActivities = { extra_activities: result };
+
+            AttendeesModel.findOneAndUpdate(
+              { _id: req.params.id },
+              attendeeActivities
+            )
               .then(() => {
                 res.sendStatus(201);
               })
@@ -96,6 +97,16 @@ const attendees = {
         })
         .catch(() => res.sendStatus(500));
     }
+  },
+
+  modifyAttendeesNative(req, res) {
+    const attendeesForm = req.body;
+
+    AttendeesModel.findOneAndUpdate({ _id: req.params.id }, attendeesForm)
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(() => res.sendStatus(500));
   },
 };
 
