@@ -7,9 +7,7 @@ const activities = {
 
     if (!activitiesForm.name) return res.sendStatus(400);
     if (!activitiesForm.date) return res.sendStatus(400);
-    if (!activitiesForm.duration) return res.sendStatus(400);
     if (!activitiesForm.price) return res.sendStatus(400);
-    if (!activitiesForm.desc) return res.sendStatus(400);
     if (!activitiesForm.event) return res.sendStatus(400);
     if (!activitiesForm.role) return res.sendStatus(400);
 

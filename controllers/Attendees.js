@@ -49,7 +49,6 @@ const attendees = {
   },
 
   listOneAttendeesByEmail(req, res, next) {
-    console.log(req.body);
     AttendeesModel.findOne({ event: req.body.event, email: req.body.email })
       .populate(["role", "event", "extra_activities"])
       .then((data) => {
