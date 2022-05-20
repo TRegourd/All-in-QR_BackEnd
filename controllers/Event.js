@@ -7,7 +7,8 @@ const dayjs = require("dayjs");
 
 const events = {
   createEvent(req, res) {
-    const { name, start_date, end_date, place, desc, admin, type } = req.body;
+    const { name, start_date, end_date, place, desc, admin, type, public } =
+      req.body;
     const uid = new ShortUniqueId({ length: 4, dictionary: "number" });
 
     if (!name) return res.sendStatus(400);
@@ -26,6 +27,7 @@ const events = {
       type,
       max_attendees: 100,
       uid: uid(),
+      public,
     })
       .then((resultEvent) => {
         const rolesForm = {
@@ -115,6 +117,7 @@ const events = {
       desc,
       max_attendees,
       background_image,
+      public,
     } = req.body;
 
     if (!name) return res.sendStatus(400);
@@ -131,6 +134,7 @@ const events = {
       desc,
       max_attendees,
       background_image,
+      public,
     })
       .then(() => {
         res.sendStatus(200);
