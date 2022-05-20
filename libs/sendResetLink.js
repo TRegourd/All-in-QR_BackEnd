@@ -25,7 +25,7 @@ async function sendResetEmail(email, uuid) {
     let info = await transporter.sendMail({
       from: '"Fred Foo 👻" <foo@example.com>',
       to: email,
-      subject: "Rest Password",
+      subject: "Reset Password",
       text: `To reset your password, please click on this link: http://localhost:3000/reset/${uuid.token}.This link is valid 15 minutes`,
       html: `<p>To reset your password, please click on <a href="http://localhost:3000/reset/${uuid.token}">this link</a></p>
       <p>This link is valid 15 minutes</p>`,
