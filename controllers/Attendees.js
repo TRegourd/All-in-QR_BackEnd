@@ -68,24 +68,34 @@ const attendees = {
   },
 
   modifyAttendees(req, res) {
-    const attendeesForm = req.body;
+    console.log(req.body);
 
-    const array = req.body.extra_activities.split(",");
-    console.log(array);
-    AttendeesModel.findById(req.body.id).then((attendee) => {
-      let event = attendee.event;
-      ActivitiesModel.find({ name: { $in: array }, event: event }).then(
-        (result) => {
-          const toto = { extra_activities: result };
-          console.log(toto);
-          AttendeesModel.findOneAndUpdate({ _id: req.params.id }, toto)
-            .then(() => {
-              res.sendStatus(201);
-            })
-            .catch(() => res.sendStatus(500));
-        }
-      );
-    });
+    if (req.body.extra_activities) {
+      const array = req.body.extra_activities.split(",");
+      console.log(array);
+      AttendeesModel.findById(req.body.id).then((attendee) => {
+        let event = attendee.event;
+        ActivitiesModel.find({ name: { $in: array }, event: event }).then(
+          (result) => {
+            const toto = { extra_activities: result };
+            console.log(toto);
+            AttendeesModel.findOneAndUpdate({ _id: req.params.id }, toto)
+              .then(() => {
+                res.sendStatus(201);
+              })
+              .catch(() => res.sendStatus(500));
+          }
+        );
+      });
+    } else {
+      const attendeesForm = req.body;
+
+      AttendeesModel.findOneAndUpdate({ _id: req.params.id }, attendeesForm)
+        .then(() => {
+          res.sendStatus(201);
+        })
+        .catch(() => res.sendStatus(500));
+    }
   },
 };
 
