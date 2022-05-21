@@ -143,6 +143,21 @@ const events = {
         res.sendStatus(500);
       });
   },
+
+  modifyEventTurnover(req, res) {
+    const idEvent = req.params.id;
+    console.log(req.body);
+
+    EvtModel.findByIdAndUpdate(idEvent, {
+      $inc: { turnover: Number(req.body.total) },
+    })
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch(() => {
+        res.sendStatus(500);
+      });
+  },
 };
 
 module.exports = events;

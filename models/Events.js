@@ -12,6 +12,7 @@ const EventSchema = new mongoose.Schema({
   background_image: String,
   uid: Number,
   public: Boolean,
+  turnover: { Number, default: 0 },
 });
 
 const EvtModel = mongoose.model("Events", EventSchema);
