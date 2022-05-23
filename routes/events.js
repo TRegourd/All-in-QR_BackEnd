@@ -3,13 +3,13 @@ var eventRouter = express.Router();
 const Event = require("../controllers/Event");
 const checkAuth = require("../middlewares/checkAuth");
 
-eventRouter.post("/", checkAuth, Event.createEvent);
+eventRouter.post("/", Event.createEvent);
 
 eventRouter.get("/", checkAuth, Event.getEvents);
 
 eventRouter.get("/home/all", Event.getAllEvents);
 
-eventRouter.get("/:id", checkAuth, Event.getOneEvent);
+eventRouter.get("/:id", Event.getOneEvent);
 
 eventRouter.get("/native/:id", Event.getOneEventNative);
 
