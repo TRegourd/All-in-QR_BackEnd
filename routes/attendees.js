@@ -3,18 +3,18 @@ const Attendees = require("../controllers/Attendees");
 var router = express.Router();
 const checkAuth = require("../middlewares/checkAuth");
 
-router.post("/", checkAuth, Attendees.createAttendees);
+router.post("/", Attendees.createAttendees);
 
-router.post("/email", checkAuth, Attendees.listOneAttendeesByEmail);
+router.post("/email", Attendees.listOneAttendeesByEmail);
 
-router.get("/event/:id", checkAuth, Attendees.listAttendees);
+router.get("/event/:id", Attendees.listAttendees);
 
-router.put("/:id", checkAuth, Attendees.modifyAttendees);
+router.put("/:id", Attendees.modifyAttendees);
 
-router.put("/native/:id", checkAuth, Attendees.modifyAttendeesNative);
+router.put("/native/:id", Attendees.modifyAttendeesNative);
 
-router.get("/:id", checkAuth, Attendees.listOneAttendees);
+router.get("/:id", Attendees.listOneAttendees);
 
-router.post("/delete", checkAuth, Attendees.deleteAttendees);
+router.post("/delete", Attendees.deleteAttendees);
 
 module.exports = router;
