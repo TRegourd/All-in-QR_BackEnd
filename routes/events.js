@@ -13,7 +13,7 @@ eventRouter.get("/:id", Event.getOneEvent);
 
 eventRouter.get("/native/:id", Event.getOneEventNative);
 
-eventRouter.put("/:id", checkAuth, Event.modifyEventById);
+eventRouter.put("/:id", Event.modifyEventById);
 eventRouter.put("/:id/sum", Event.modifyEventTurnover);
 
 eventRouter.delete("/:id", Event.deleteOneEvent);
